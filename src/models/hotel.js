@@ -1,7 +1,7 @@
 const { DataTypes } = require('sequelize');
-const sequelize = require('../config/database');
+const database = require('../config/database');
 
-const Hotel = sequelize.define('Hotel', {
+const Hotel = database.define('Hotel', {
     name: {
       type: DataTypes.STRING,
       allowNull: false,
