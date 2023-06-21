@@ -11,23 +11,32 @@ app.use(express.json());
 app.use('/auth', authRoutes);
 app.use('/hotels', hotelRoutes);
 
-// app.get('/test/user', async (req, res) => {
-//   try {
-//     const user = await User.create({
-//       username: 'john_doe',
-//       password: '123456',
-//     });
+app.get('/test/user', async (req, res) => {
+  try {
+    // const user = await User.create({
+    //   username: 'renato',
+    //   password: '123456',
+    // });
 
-//     res.json(user);
-//   } catch (error) {
-//     res.status(500).json({ error: 'An error occurred while creating a user' });
-//   }
-// });
+    res.json(user);
+  } catch (error) {
+    res.status(500).json(error);
+  }
+});
+
+app.get('/test/userList', async (req, res) => {
+  try {
+    const users = await User.findAll();
+
+    res.json(users);
+  } catch (error) {
+    res.status(500).json(error);
+  }
+});
 
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });
-
 
 async function createUser() {
   try {
@@ -35,8 +44,8 @@ async function createUser() {
     console.log('Database synced');
 
     const user = await User.create({
-      username: 'john_doe',
-      password: '123456',
+      username: 'pickles_rick69',
+      password: '420420420',
       isAdmin: true,
     });
 
@@ -65,4 +74,5 @@ async function getUserById(id) {
 }
 
 
+createUser();
 getAllUsers();
