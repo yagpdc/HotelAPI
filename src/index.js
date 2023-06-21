@@ -74,5 +74,5 @@ async function getUserById(id) {
 }
 
 
-createUser();
-getAllUsers();
+// createUser();
+// getAllUsers();
