@@ -1,12 +1,15 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const UserController = require('../controllers/userAPI');
+const UserController = require("../controllers/userAPI");
+const { authenticate, isAdmin } = require("../middleware/authMiddleware");
 
+// Rotas públicas
+router.get("/", UserController.getAllUsers);
+router.get("/:id", UserController.getUserById);
 
-router.get('/', UserController.getAllUsers);
-router.post('/', UserController.createUser);
-router.get('/:id', UserController.getUserById);
-router.put('/:id', UserController.updateUser);
-router.delete('/:id', UserController.deleteUser);
+// Rotas autenticadas
+router.post("/", authenticate, isAdmin,UserController.createUser);
+router.put("/:id", authenticate, isAdmin,UserController.updateUser);
+router.delete("/:id", authenticate, isAdmin,UserController.deleteUser);
 
 module.exports = router;

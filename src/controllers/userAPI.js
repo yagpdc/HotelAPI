@@ -1,10 +1,11 @@
-const UserModel = require('../models/user');
+const UserModel = require('../models/user').Model;
 
 const getAllUsers = async (req, res) => {
   try {
-    const users = await UserModel.list();
+    const users = await UserModel.findAll();
     res.json(users);
   } catch (error) {
+    console.log(error)
     res.status(500).json({ error: 'Ocorreu um erro ao listar usuários' });
   }
 };
