@@ -22,40 +22,4 @@ const User = sequelize.define('User', {
   },
 });
 
-module.exports = {
-  list: async function () {
-    const users = await UserModel.findAll();
-    return users;
-  },
-
-  save: async function (username, password, isAdmin = false) {
-    const user = await UserModel.create({
-      username: username,
-      password: password,
-      isAdmin: isAdmin,
-    });
-
-    return user;
-  },
-
-  update: async function (id, username, password, isAdmin = false) {
-    return await UserModel.update(
-      { username: username, password: password, isAdmin: isAdmin },
-      {
-        where: { codigo: id },
-      }
-    );
-  },
-
-  delete: async function (id) {
-    const user = await this.getById(id);
-    if (!user) {
-      throw new Error('Usuário não encontrado');
-    }
-
-    await user.destroy();
-    return user;
-  },
-
-  Model: User
-};
+module.exports = User

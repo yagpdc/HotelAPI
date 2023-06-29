@@ -1,4 +1,4 @@
-const Hotel = require("../models/hotel").Model;
+const Hotel = require("../models/hotel");
 
 const getAllHotels = async (req, res) => {
   try {
@@ -12,11 +12,12 @@ const getAllHotels = async (req, res) => {
 
 const createHotel = async (req, res) => {
   try {
-    const { name, numberOfRooms } = req.body;
+    const { name, numberOfRooms, price } = req.body;
 
     await Hotel.create({
       name,
       numberOfRooms,
+      price,
     });
 
     res.status(201).json({ message: "Hotel criado com sucesso" });
@@ -28,7 +29,7 @@ const createHotel = async (req, res) => {
 
 const updateHotel = async (req, res) => {
   const { id } = req.params;
-  const { name, numberOfRooms } = req.body;
+  const { name, numberOfRooms, price } = req.body;
   try {
     const hotel = await Hotel.findByPk(id);
     if (!hotel) {
