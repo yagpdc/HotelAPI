@@ -1,11 +1,10 @@
 const express = require("express");
 const router = express.Router();
-const sequelize = require("../helpers/bd");
+const UserModel = require('../models/user');
+const HotelModel = require('../models/hotel');
+const sequelize = require('../config/database');
 
-const UserModel = require('../model/User');
-const HotelModel = require('../model/Hotel');
-
-router.get('/', async (req, res) => {
+router.get('/apiTest', async (req, res) => {
     await sequelize.sync({ force: true });
 
     let users = [

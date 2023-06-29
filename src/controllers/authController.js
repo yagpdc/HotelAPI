@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken');
-const User = require('../models/User');
+const User = require('../models/user');
 const crypto = require('node:crypto'); 
 
 const register = async (req, res) => {
@@ -28,7 +28,7 @@ const login = async (req, res) => {
       return res.status(401).json({ error: 'Usuario ou senha invalido' });
     }
     const hashedPassword =  crypto.createHash('sha256', "123456").update(password).digest('hex');
-    const isPasswordValid = crypto.timingSafeEqual(Buffer.from(user.password), Buffer.from(hashedPassword));
+    const isPasswordValid = crypto.timingSafeEqual(Buffer.from(user.password), Buffer.from(hashedPassword)); 
     if (!isPasswordValid) {
       return res.status(401).json({ error: 'Usuario ou senha invalido' });
     }
